@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+
+
+minio:
+  bucket: demo
+  access-key: admin
+  secret-key: adminpassword
+  url: http://172.17.0.2:9000
+

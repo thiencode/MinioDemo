@@ -1,0 +1,74 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'java'
+}
+
+group = 'com.unicloud.sharecv'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+bootJar {
+    enabled = false
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    def springFramework = '5.7.2'
+    /*
+    Spring
+     */
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//    implementation 'org.springframework:spring-tx'
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-resource-server', version: springFramework
+//    implementation group: 'org.springframework.security', name: 'spring-security-config', version: springFramework
+//    implementation group: 'org.springframework.security', name: 'spring-security-core', version: springFramework
+//    implementation group: 'org.springframework.security', name: 'spring-security-web', version: springFramework
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: springFramework
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.7.3'
+
+    /**
+     * Open API
+     */
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
+    /**
+     * Lombok
+     */
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    /**
+     * Logback
+     */
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+
+    /**
+     * Json, Gson
+     */
+    implementation 'org.json:json:20220320'
+    implementation 'com.google.code.gson:gson:2.9.1'
+
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.3'
+
+
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+    /*
+
+    * Minio
+
+    */
+    implementation 'io.minio:minio:8.4.5'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation "commons-io:commons-io:2.11.0"
+//    implementation 'com.jlefebure:spring-boot-starter-minio:1.10'
+
+}
