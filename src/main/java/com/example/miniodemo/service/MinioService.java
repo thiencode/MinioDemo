@@ -3,16 +3,11 @@ package com.example.miniodemo.service;
 import com.example.miniodemo.config.MinioConfigurationProperties;
 import com.example.miniodemo.http.dto.FileDto;
 import io.minio.*;
-import io.minio.errors.*;
 import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +17,7 @@ public class MinioService {
 
     private final MinioClient minioClient;
     private final MinioConfigurationProperties minioConfigurationProperties;
+
     @Autowired
     public MinioService(MinioClient minioClient, MinioConfigurationProperties minioConfigurationProperties) {
         this.minioClient = minioClient;
@@ -29,8 +25,7 @@ public class MinioService {
     }
 
 
-
-    public List<FileDto>getListObject() {
+    public List<FileDto> getListObject() {
         List<FileDto> objects = new ArrayList<>();
 
         try {
@@ -55,12 +50,12 @@ public class MinioService {
         return "http://localhost:8080/file/".concat(filename);
     }
 
-    public FileDto uploadFile(FileDto request){
+    public FileDto uploadFile(FileDto request) {
         try {
             minioClient.putObject(PutObjectArgs.builder()
-                            .bucket(minioConfigurationProperties.getBucket())
-                            .object(request.getFile().getOriginalFilename())
-                            .stream(request.getFile().getInputStream(), request.getFile().getSize(), -1)
+                    .bucket(minioConfigurationProperties.getBucket())
+                    .object(request.getFile().getOriginalFilename())
+                    .stream(request.getFile().getInputStream(), request.getFile().getSize(), -1)
                     .build());
         } catch (Exception e) {
             log.error("Happened error when upload file: ", e);
@@ -74,12 +69,12 @@ public class MinioService {
                 .build();
     }
 
-    public InputStream getObject(String filename){
+    public InputStream getObject(String filename) {
         InputStream stream;
         try {
             stream = minioClient.getObject(GetObjectArgs.builder()
-                            .bucket(minioConfigurationProperties.getBucket())
-                            .object(filename)
+                    .bucket(minioConfigurationProperties.getBucket())
+                    .object(filename)
                     .build());
         } catch (Exception e) {
             log.error("Happened error when get list objects from minio: ", e);
